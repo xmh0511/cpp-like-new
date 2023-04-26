@@ -102,12 +102,12 @@ macro_rules! new{
 	($type:ty { $init:expr })=>{
 		$crate::new_obj::<$type>($init)
 	};
-	// ($type:ty [ $size:expr ])=>{
-	// 	$crate::new_arr::<$type>(&[],$size)
-	// };
-	// ($type:ty [ $size:expr ]{ $($init:expr),* })=>{
-	// 	$crate::new_arr::<$type>(&[$($init),+],$size)
-	// };
+	($type:ty [ $size:expr ])=>{
+		$crate::new_arr::<$type>(&[],$size)
+	};
+	($type:ty [ $size:expr ]{ $($init:expr),* })=>{
+		$crate::new_arr::<$type>(&[$($init),+],$size)
+	};
 	// ($type:ty [$size:expr] $([$lt:literal])+)=>{
 	// 	// i32 [e] [2] [3]
 	// 	//type T = [[i32;3];2];
