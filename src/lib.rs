@@ -99,29 +99,29 @@ macro_rules! new{
 			$crate::new_obj::<$type>(T::default())
 		}
 	};
-	($type:ty { $init:expr })=>{
-		$crate::new_obj::<$type>($init)
-	};
-	($type:ty [ $size:expr ])=>{
-		$crate::new_arr::<$type>(&[],$size)
-	};
-	($type:ty [ $size:expr ]{ $($init:expr),* })=>{
-		$crate::new_arr::<$type>(&[$($init),+],$size)
-	};
-	($type:ty [$size:expr] $([$lt:literal])+)=>{
-		// i32 [e] [2] [3]
-		//type T = [[i32;3];2];
-		{
-			type T = form_rust_arr_declarator_from_c_arr_declarator!($type, $($lt),+);
-			$crate::new_arr::<T>(&[], $size)
-		}
-	};
-	($type:ty [$size:expr] $([$lt:literal])+ { $($init:expr),* })=>{
-		{
-			type T = form_rust_arr_declarator_from_c_arr_declarator!($type, $($lt),+);
-			$crate::new_arr::<T>(&[$($init),+], $size)
-		}
-	};
+	// ($type:ty { $init:expr })=>{
+	// 	$crate::new_obj::<$type>($init)
+	// };
+	// ($type:ty [ $size:expr ])=>{
+	// 	$crate::new_arr::<$type>(&[],$size)
+	// };
+	// ($type:ty [ $size:expr ]{ $($init:expr),* })=>{
+	// 	$crate::new_arr::<$type>(&[$($init),+],$size)
+	// };
+	// ($type:ty [$size:expr] $([$lt:literal])+)=>{
+	// 	// i32 [e] [2] [3]
+	// 	//type T = [[i32;3];2];
+	// 	{
+	// 		type T = form_rust_arr_declarator_from_c_arr_declarator!($type, $($lt),+);
+	// 		$crate::new_arr::<T>(&[], $size)
+	// 	}
+	// };
+	// ($type:ty [$size:expr] $([$lt:literal])+ { $($init:expr),* })=>{
+	// 	{
+	// 		type T = form_rust_arr_declarator_from_c_arr_declarator!($type, $($lt),+);
+	// 		$crate::new_arr::<T>(&[$($init),+], $size)
+	// 	}
+	// };
 }
 
 #[macro_export]
