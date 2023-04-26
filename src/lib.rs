@@ -1,16 +1,18 @@
 use std::{alloc::{Layout,self}, ptr::null_mut};
+
+/// Create a single object of the specified type
 pub unsafe fn new_obj<T>(init_expr: T)-> * mut T{
 	let layout = Layout::new::<T>();
 	let raw_ptr = alloc::alloc(layout) as * mut T;
 	std::ptr::write(raw_ptr, init_expr);
 	raw_ptr
 }
-
+/// Destroy the specified object created by new_obj
 pub unsafe fn delete_obj<T>(ptr:* const T){
 	let layout = Layout::new::<T>();
 	alloc::dealloc(ptr as * mut u8, layout);
 }
-
+/// Return type of new_arr
 pub struct ArrayPtr<T>{
 	raw_ptr:* mut T,
 	size:usize,
@@ -19,16 +21,9 @@ pub struct ArrayPtr<T>{
 
 impl<T> ArrayPtr<T>{
 	pub fn as_slice(&self) -> Option<&[T]>{
-		match self.layout{
-			Some(_)=>{
-				Some(unsafe {
-					std::slice::from_raw_parts(self.raw_ptr, self.size)
-				})
-			}
-			_=>{
-				None
-			}
-		}
+		self.as_mut_slice().map(|v|{
+			v as & [T]
+		})
 	}
 	pub fn as_mut_slice(&self)-> Option<& mut [T]>{
 		match self.layout{
@@ -45,9 +40,16 @@ impl<T> ArrayPtr<T>{
 	pub fn len(&self)->usize{
 		self.size
 	}
+	pub fn as_ptr(&self)-> * const T{
+		self.raw_ptr
+	}
+	pub fn as_mut_ptr(&self)->* mut T{
+		self.raw_ptr
+	}
 }
 
-/// new T[2]
+
+/// Create an array object of the specified type
 pub unsafe fn new_arr<T:Clone + Default>(init_list:&[T], size:usize) -> ArrayPtr<T>{
 	if init_list.len() > size{
 		panic!("the number of initializer is greater than allocated size");
@@ -72,6 +74,7 @@ pub unsafe fn new_arr<T:Clone + Default>(init_list:&[T], size:usize) -> ArrayPtr
 		}
 	}
 }
+/// Destroy the specified object created by new_arr
 pub unsafe fn delete_arr<T>(arr_ptr:ArrayPtr<T>){
 	match arr_ptr.layout{
 		Some(layout)=>{
