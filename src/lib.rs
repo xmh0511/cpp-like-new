@@ -84,7 +84,7 @@ pub unsafe fn delete_arr<T>(arr_ptr:ArrayPtr<T>){
 #[macro_export]
 macro_rules! form_rust_arr_declarator_from_c_arr_declarator {
 	($type:ty, $lt0:literal, $($lt:literal), +) => {
-		[form_rust_arr_declarator_from_c_arr_declarator!($type, $($lt),+); $lt0]
+		[$crate::form_rust_arr_declarator_from_c_arr_declarator!($type, $($lt),+); $lt0]
 	};
 	($type:ty, $lt:literal)=>{
 		[$type; $lt]
