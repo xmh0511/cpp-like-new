@@ -99,9 +99,9 @@ macro_rules! new{
 			$crate::new_obj::<$type>(T::default())
 		}
 	};
-	// ($type:ty { $init:expr })=>{
-	// 	$crate::new_obj::<$type>($init)
-	// };
+	($type:ty { $init:expr })=>{
+		$crate::new_obj::<$type>($init)
+	};
 	// ($type:ty [ $size:expr ])=>{
 	// 	$crate::new_arr::<$type>(&[],$size)
 	// };
