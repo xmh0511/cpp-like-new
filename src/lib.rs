@@ -134,37 +134,37 @@ macro_rules! delete {
 	};
 }
 
-// #[cfg(test)]
-// mod test{
-// 	use super::{new,delete};
-// 	#[test]
-// 	fn test_obj(){
-// 		unsafe{
+#[cfg(test)]
+mod test{
+	use super::{new,delete};
+	#[test]
+	fn test_obj(){
+		unsafe{
 			
-// 			let default_ptr = new!(i32);
-// 			assert_eq!(*default_ptr,0);
-// 			let ptr = new!(i32 {10});
-// 			assert_eq!(*ptr, 10);
-// 			delete!(default_ptr);
-// 			delete!(ptr);
-// 		};
-// 	}
-// 	#[test]
-// 	fn test_arr(){
-// 		unsafe{
-// 			let size = 2;
-// 			let ptr = new!(i32[size]);
-// 			assert_eq!(ptr.as_slice(),Some([0,0].as_slice()));
-// 			let ptr_init = new!(i32[size]{1});
-// 			assert_eq!(ptr_init.as_slice(),Some([1,0].as_slice()));
-// 			delete!([] ptr);
-// 			delete!([] ptr_init);
-// 			let multiple_arr_ptr = new!(i32[size][3]);
-// 			assert_eq!(multiple_arr_ptr.as_slice(),Some([[0,0,0],[0,0,0]].as_slice()));
-// 			let multiple_arr_ptr_init = new!(i32[size][3]{[1,2,3]});
-// 			assert_eq!(multiple_arr_ptr_init.as_slice(),Some([[1,2,3],[0,0,0]].as_slice()));
-// 			delete!([] multiple_arr_ptr);
-// 			delete!([] multiple_arr_ptr_init);
-// 		};
-// 	}
-// }
+			let default_ptr = new!(i32);
+			assert_eq!(*default_ptr,0);
+			let ptr = new!(i32 {10});
+			assert_eq!(*ptr, 10);
+			delete!(default_ptr);
+			delete!(ptr);
+		};
+	}
+	#[test]
+	fn test_arr(){
+		unsafe{
+			let size = 2;
+			let ptr = new!(i32[size]);
+			assert_eq!(ptr.as_slice(),Some([0,0].as_slice()));
+			let ptr_init = new!(i32[size]{1});
+			assert_eq!(ptr_init.as_slice(),Some([1,0].as_slice()));
+			delete!([] ptr);
+			delete!([] ptr_init);
+			let multiple_arr_ptr = new!(i32[size][3]);
+			assert_eq!(multiple_arr_ptr.as_slice(),Some([[0,0,0],[0,0,0]].as_slice()));
+			let multiple_arr_ptr_init = new!(i32[size][3]{[1,2,3]});
+			assert_eq!(multiple_arr_ptr_init.as_slice(),Some([[1,2,3],[0,0,0]].as_slice()));
+			delete!([] multiple_arr_ptr);
+			delete!([] multiple_arr_ptr_init);
+		};
+	}
+}
