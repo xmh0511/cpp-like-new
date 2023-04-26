@@ -136,9 +136,11 @@ macro_rules! delete {
 
 #[cfg(test)]
 mod test{
+	use super::{new,delete};
 	#[test]
 	fn test_obj(){
 		unsafe{
+			
 			let default_ptr = new!(i32);
 			assert_eq!(*default_ptr,0);
 			let ptr = new!(i32 {10});
