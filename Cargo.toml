@@ -3,7 +3,7 @@ name = "cpp-like-new"
 version = "0.1.0"
 edition = "2021"
 description = "A library that allows you to create/destroy objects in Rust in a similar way to using new/delete expressions in C++"
-license = "MIT License"
+license = "MIT OR Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/xmh0511/cpp-like-new.git"
 
