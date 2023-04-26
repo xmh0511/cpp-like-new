@@ -96,30 +96,30 @@ macro_rules! new{
 	($type:ty) => {
 		{
 			type T = $type;
-			super::new_obj::<$type>(T::default())
+			$crate::new_obj::<$type>(T::default())
 		}
 	};
 	($type:ty { $init:expr })=>{
-		super::new_obj::<$type>($init)
+		$crate::new_obj::<$type>($init)
 	};
 	($type:ty [ $size:expr ])=>{
-		super::new_arr::<$type>(&[],$size)
+		$crate::new_arr::<$type>(&[],$size)
 	};
 	($type:ty [ $size:expr ]{ $($init:expr),* })=>{
-		super::new_arr::<$type>(&[$($init),+],$size)
+		$crate::new_arr::<$type>(&[$($init),+],$size)
 	};
 	($type:ty [$size:expr] $([$lt:literal])+)=>{
 		// i32 [e] [2] [3]
 		//type T = [[i32;3];2];
 		{
 			type T = form_rust_arr_declarator_from_c_arr_declarator!($type, $($lt),+);
-			super::new_arr::<T>(&[], $size)
+			$crate::new_arr::<T>(&[], $size)
 		}
 	};
 	($type:ty [$size:expr] $([$lt:literal])+ { $($init:expr),* })=>{
 		{
 			type T = form_rust_arr_declarator_from_c_arr_declarator!($type, $($lt),+);
-			super::new_arr::<T>(&[$($init),+], $size)
+			$crate::new_arr::<T>(&[$($init),+], $size)
 		}
 	};
 }
@@ -127,10 +127,10 @@ macro_rules! new{
 #[macro_export]
 macro_rules! delete {
 	($ptr:expr) => {
-		super::delete_obj($ptr)
+		$crate::delete_obj($ptr)
 	};
 	([] $ptr:expr)=>{
-		super::delete_arr($ptr)
+		$crate::delete_arr($ptr)
 	};
 }
 
