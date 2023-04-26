@@ -112,13 +112,13 @@ macro_rules! new{
 		// i32 [e] [2] [3]
 		//type T = [[i32;3];2];
 		{
-			type T = form_rust_arr_declarator_from_c_arr_declarator!($type, $($lt),+);
+			type T = $crate::form_rust_arr_declarator_from_c_arr_declarator!($type, $($lt),+);
 			$crate::new_arr::<T>(&[], $size)
 		}
 	};
 	($type:ty [$size:expr] $([$lt:literal])+ { $($init:expr),* })=>{
 		{
-			type T = form_rust_arr_declarator_from_c_arr_declarator!($type, $($lt),+);
+			type T = $crate::form_rust_arr_declarator_from_c_arr_declarator!($type, $($lt),+);
 			$crate::new_arr::<T>(&[$($init),+], $size)
 		}
 	};
